@@ -1,7 +1,5 @@
 package commands;
 
-import com.sun.java.accessibility.util.java.awt.TextComponentTranslator;
-
 import configmanager.ConfigController;
 import configmanager.RotationModel;
 import mainpackage.ChatController;
