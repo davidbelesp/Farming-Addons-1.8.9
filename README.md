@@ -32,6 +32,7 @@ For Mac users:
 | Command   | Parameters| Description                |
 | :-------- | :------- | :------------------------- |
 | `fahelp` | - | shows useful information about commands |
+| `faconfig` | - | shows useful information about config management |
 | `presetlist` | - | shows all saved presets |
 | `rotate` | `horizontalNumber , verticalNumber` | rotates camera to the position given |
 | `rotate` | `presetName` | rotates camera to the preset saved |
@@ -44,6 +45,14 @@ For Mac users:
 ```
 
 Shows command guides and how to use them.
+
+### Config command
+
+```bash
+  /faconfig
+```
+
+Shows command guides and how to use config manager.
 
 ### Rotate command
 
