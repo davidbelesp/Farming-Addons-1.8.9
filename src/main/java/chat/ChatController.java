@@ -1,4 +1,4 @@
-package mainpackage;
+package chat;
 
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.ChatComponentText;

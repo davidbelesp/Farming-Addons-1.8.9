@@ -1,6 +1,7 @@
 package mainpackage;
 
 
+import chat.ChatController;
 import configmanager.ConfigController;
 import configmanager.RotationModel;
 import net.minecraft.client.Minecraft;

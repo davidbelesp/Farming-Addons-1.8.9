@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
 
-import mainpackage.ChatController;
+import chat.ChatController;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraftforge.common.config.ConfigCategory;
@@ -18,10 +18,32 @@ public class ConfigController {
 
 	private final static String CATEGORY_PRESETS = "presets";
 	
-	public static RotationModel loadConfig(String key) {
+	public static boolean loadConfigBoolean(String key, String category) {
 		
-		File configFile = new File(Loader.instance().getConfigDir(), "farmingaddons.cfg");
-		Configuration config = new Configuration(configFile);
+		Configuration config = loadConfigFile();
+		
+		config.load();
+		
+		Boolean value = Boolean.valueOf(config.getString(category, key, "false", "breaking stem configuration"));
+		
+		return value;
+	}
+	
+	public static void saveConfigBoolean(String key, String category, boolean bool) {
+		
+		Configuration config = loadConfigFile();
+		
+		config.load();
+		
+		Property p = config.get(key, category, false, "breaking stem configuration");
+		p.set(bool);
+		
+		config.save();
+	}
+	
+	public static RotationModel loadRotationConfig(String key) {
+		
+		Configuration config = loadConfigFile();
 		
 		config.load();
 		
@@ -40,9 +62,9 @@ public class ConfigController {
 		return rotationModel;
 	}
 	
-	public static void saveConfig(String key, String value) {
-		File configFile = new File(Loader.instance().getConfigDir(), "farmingaddons.cfg");
-		Configuration config = new Configuration(configFile);
+	public static void savePresetConfig(String key, String value) {
+		
+		Configuration config = loadConfigFile();
 		
 		config.load();
 		
@@ -53,8 +75,8 @@ public class ConfigController {
 	}
 	
 	public static HashSet<RotationModel> getAllPresets() {
-		File configFile = new File(Loader.instance().getConfigDir(), "farmingaddons.cfg");
-		Configuration config = new Configuration(configFile);
+		
+		Configuration config = loadConfigFile();
 		
 		config.load();
 		
@@ -63,7 +85,7 @@ public class ConfigController {
 		ConfigCategory cat = config.getCategory(CATEGORY_PRESETS);
 		
 		for (String key : cat.keySet()) {
-			models.add(ConfigController.loadConfig(key));
+			models.add(ConfigController.loadRotationConfig(key));
 		}
 		
 		return models;
@@ -71,7 +93,9 @@ public class ConfigController {
 		
 	}
 	
-	
-	
+	public static Configuration loadConfigFile() {
+		File configFile = new File(Loader.instance().getConfigDir(), "farmingaddons.cfg");
+		return new Configuration(configFile);
+	}
 	
 }

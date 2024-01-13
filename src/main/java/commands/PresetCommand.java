@@ -1,7 +1,8 @@
 package commands;
 
+import chat.ChatController;
+import chat.Formatting;
 import configmanager.ConfigController;
-import mainpackage.ChatController;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandBase;
@@ -32,8 +33,8 @@ public class PresetCommand extends CommandBase{
 		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 		
 		if(args.length != 3) {
-			ChatController.sendClientChat(player, "\u00A7cInvalid command arguments, use:");
-			ChatController.sendClientChat(player, "\u00A7c/savepreset {name} {number} {number}");
+			ChatController.sendClientChat(player, Formatting.RED + "Invalid command arguments, use:");
+			ChatController.sendClientChat(player, Formatting.RED + "/savepreset {name} {number} {number}");
 			return;
 		}
 		
@@ -41,9 +42,9 @@ public class PresetCommand extends CommandBase{
 		float yaw = Float.valueOf(args[1]);
 		float pitch = Float.valueOf(args[2]);
 
-		ConfigController.saveConfig(name, "["+ yaw + "," + pitch +"]");
+		ConfigController.savePresetConfig(name, "["+ yaw + "," + pitch +"]");
 		
-		ChatController.sendClientChat(player, "\u00A7aSaved preset name " + name + " successfully");
+		ChatController.sendClientChat(player, Formatting.LIME + "Saved preset name " + name + " successfully");
 		
 	}
 	
@@ -52,8 +53,5 @@ public class PresetCommand extends CommandBase{
     {
         return true;
     }
-	
-	
-	
 	
 }

@@ -1,8 +1,9 @@
 package commands;
 
+import chat.ChatController;
+import chat.Formatting;
 import configmanager.ConfigController;
 import configmanager.RotationModel;
-import mainpackage.ChatController;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandBase;
@@ -18,13 +19,11 @@ public class RotationCommand extends CommandBase{
 
 	@Override
 	public String getCommandName() {
-		// TODO Auto-generated method stub
 		return "rotate";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -36,14 +35,14 @@ public class RotationCommand extends CommandBase{
 		float pitch;
 		
 		if(args.length > 2 || args.length == 0) {
-			ChatController.sendClientChat(player, "\u00A7cInvalid command arguments, use one below:");
-			ChatController.sendClientChat(player, "\u00A7c/rotate {horizontal} {vertical}");
-			ChatController.sendClientChat(player, "\u00A7c/rotate {preset name}");
+			ChatController.sendClientChat(player, Formatting.RED + "Invalid command arguments, use one below:");
+			ChatController.sendClientChat(player, Formatting.RED + "/rotate {horizontal} {vertical}");
+			ChatController.sendClientChat(player, Formatting.RED + "/rotate {preset name}");
 			return;
 		}
 
 		if(args.length == 1) {
-			RotationModel model = ConfigController.loadConfig(args[0]);
+			RotationModel model = ConfigController.loadRotationConfig(args[0]);
 			
 			yaw = model.yaw;
 			pitch = model.pitch;
@@ -66,8 +65,5 @@ public class RotationCommand extends CommandBase{
     {
         return true;
     }
-	
-	
-	
 	
 }

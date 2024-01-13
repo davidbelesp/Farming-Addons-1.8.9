@@ -1,6 +1,6 @@
 package commands;
 
-import mainpackage.ChatController;
+import chat.ChatController;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandBase;
