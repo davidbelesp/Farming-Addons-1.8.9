@@ -5,8 +5,10 @@ import commands.DebugCommand;
 import commands.HelpCommand;
 import commands.PresetCommand;
 import commands.RotationCommand;
-import configmanager.ConfigController;
+import commands.SetResetBlockCommand;
 import events.PreventStemBreaking;
+import events.ResetBlockEvent;
+import events.ToggleKeysEvent;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -15,10 +17,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import proxy.CommonProxy;
-import proxy.TestProxy;
-import scala.tools.asm.CustomAttr;
 
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
@@ -47,9 +46,11 @@ public class FarmingAddons {
 		ClientCommandHandler.instance.registerCommand(new ListPresetCommand());
 		ClientCommandHandler.instance.registerCommand(new DebugCommand());
 		ClientCommandHandler.instance.registerCommand(new ConfigCommand());
+		ClientCommandHandler.instance.registerCommand(new SetResetBlockCommand());
 		
 		MinecraftForge.EVENT_BUS.register(new PreventStemBreaking());
-		
+		MinecraftForge.EVENT_BUS.register(new ToggleKeysEvent());
+		MinecraftForge.EVENT_BUS.register(new ResetBlockEvent());
 	}
 	
 	@EventHandler()

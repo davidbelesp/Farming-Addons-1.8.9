@@ -11,13 +11,11 @@ public class HelpCommand extends CommandBase{
 
 	@Override
 	public String getCommandName() {
-		// TODO Auto-generated method stub
 		return "fahelp";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		// TODO Auto-generated method stub
 		 
 		return null;
 	}
@@ -27,6 +25,8 @@ public class HelpCommand extends CommandBase{
 		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 		
 		ChatController.sendClientChat(player, "\u00A7a---------- Farming addons Help ----------");
+		ChatController.sendClientChat(player, "\u00A7b /setresetspawn \u00A7r| Set current position to Auto-tp to spawn");
+		ChatController.sendClientChat(player, "\u00A7b /faconfig help \u00A7r| Shows help about modifying config options");
 		ChatController.sendClientChat(player, "\u00A7b /savepreset \u00A7c<name> <horizontal> <vertical>  \u00A7r| Saves custom preset");
 		ChatController.sendClientChat(player, "\u00A7b /presetlist \u00A7r| Shows all saved presets");
 		ChatController.sendClientChat(player, "\u00A7b /rotate \u00A7c<horizontal> <vertical>  \u00A7r| Rotates camera to numbers given");

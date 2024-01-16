@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.sun.security.auth.login.ConfigFile;
+
 import chat.ChatController;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -17,14 +19,22 @@ import scala.collection.mutable.HashSet;
 public class ConfigController {
 
 	private final static String CATEGORY_PRESETS = "presets";
+	private static Configuration configFile = null;
 	
 	public static boolean loadConfigBoolean(String key, String category) {
 		
 		Configuration config = loadConfigFile();
-		
-		config.load();
-		
+
 		Boolean value = Boolean.valueOf(config.getString(category, key, "false", "breaking stem configuration"));
+		
+		return value;
+	}
+	
+	public static String loadConfigString(String key, String category) {
+		
+		Configuration config = loadConfigFile();
+		
+		String value = config.getString(key, category, "", "");
 		
 		return value;
 	}
@@ -33,19 +43,29 @@ public class ConfigController {
 		
 		Configuration config = loadConfigFile();
 		
-		config.load();
-		
 		Property p = config.get(key, category, false, "breaking stem configuration");
 		p.set(bool);
 		
 		config.save();
+		
+		updateConfigFile();
+	}
+	
+	public static void saveConfigString(String key, String category, String coordinates) {
+		
+		Configuration config = loadConfigFile();
+		
+		Property p = config.get(category, key, coordinates);
+		p.set(coordinates);
+		
+		config.save();
+		
+		updateConfigFile();
 	}
 	
 	public static RotationModel loadRotationConfig(String key) {
 		
 		Configuration config = loadConfigFile();
-		
-		config.load();
 		
 		String value = config.getString(key, CATEGORY_PRESETS, "", "");
 		
@@ -66,19 +86,17 @@ public class ConfigController {
 		
 		Configuration config = loadConfigFile();
 		
-		config.load();
-		
 		Property p = config.get(CATEGORY_PRESETS, key, value);
 		p.set(value);
 		
 		config.save();
+		
+		updateConfigFile();
 	}
 	
 	public static HashSet<RotationModel> getAllPresets() {
 		
 		Configuration config = loadConfigFile();
-		
-		config.load();
 		
 		HashSet<RotationModel> models = new HashSet();
 		
@@ -89,13 +107,21 @@ public class ConfigController {
 		}
 		
 		return models;
-		
-		
 	}
 	
 	public static Configuration loadConfigFile() {
+		if(configFile == null) {
+			updateConfigFile();
+			return ConfigController.configFile;
+		}
+		
+		return ConfigController.configFile;
+	}
+	
+	public static void updateConfigFile() {
 		File configFile = new File(Loader.instance().getConfigDir(), "farmingaddons.cfg");
-		return new Configuration(configFile);
+		ConfigController.configFile = new Configuration(configFile);
+		ConfigController.configFile.load();
 	}
 	
 }

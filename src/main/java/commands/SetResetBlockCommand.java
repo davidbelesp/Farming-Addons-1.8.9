@@ -9,36 +9,38 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 
-public class PresetCommand extends CommandBase{
+public class SetResetBlockCommand extends CommandBase{
 
+	Minecraft minecraft = Minecraft.getMinecraft();
+	
 	@Override
 	public String getCommandName() {
-		return "savepreset";
+		return "setresetspawn";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
+		 
 		return null;
 	}
 
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 		
-		if(args.length != 3) {
-			ChatController.sendClientChat(player, Formatting.RED + "Invalid command arguments, use:");
-			ChatController.sendClientChat(player, Formatting.RED + "/savepreset {name} {number} {number}");
-			return;
-		}
+		EntityPlayerSP player = minecraft.thePlayer;
 		
-		String name = args[0];
-		float yaw = Float.valueOf(args[1]);
-		float pitch = Float.valueOf(args[2]);
-
-		ConfigController.savePresetConfig(name, "["+ yaw + "," + pitch +"]");
+		int posX = (int) player.posX;
+		int posZ = (int) player.posZ;
+		int posY = (int) player.posY + 1;
 		
-		ChatController.sendClientChat(player, Formatting.LIME + "Saved preset name " + name + " successfully");
 		
+		ConfigController.saveConfigString("coordinates", "reset", posX + ":" + posY + ":" + posZ);
+		
+		ChatController.sendClientChat(player,
+				Formatting.AQUA + "Saved reset block at: " + 
+						Formatting.LIME + "'X=" + posX + "'" + 
+						Formatting.LIME + "'Y=" + posY + "'" + 
+						Formatting.LIME + "'Z=" + posZ + "'");
 	}
 	
 	@Override

@@ -26,6 +26,8 @@ For Mac users:
 
 - Camera rotation command for perfect angles
 - Rotation presets to classify by name
+- Toggle WASD keys to automate keyboard inputs
+- Automate /warp garden selecting a block in your world
 
 ## How to use and command guidelines
 
@@ -33,6 +35,7 @@ For Mac users:
 | :-------- | :------- | :------------------------- |
 | `fahelp` | - | shows useful information about commands |
 | `faconfig` | - | shows useful information about config management |
+| `setresetspawn` | - | set the current block position to auto-do `/warp garden` |
 | `presetlist` | - | shows all saved presets |
 | `rotate` | `horizontalNumber , verticalNumber` | rotates camera to the position given |
 | `rotate` | `presetName` | rotates camera to the preset saved |
@@ -53,6 +56,16 @@ Shows command guides and how to use them.
 ```
 
 Shows command guides and how to use config manager.
+
+### Set Reset Spawn command
+
+```bash
+  /setresetspawn
+```
+
+Sets the actual point you are in to automatically teleport you to "/warp garden".
+
+Once you get into the block you will be auto tp to the spawn.
 
 ### Rotate command
 
@@ -89,5 +102,5 @@ so you can do **/rotate melon** later and be (90.0 / 30.0)
 
 ## TODO
 
-- Left Click toggle key
-- Toggle W option
+- Left Click toggle key.
+- Graphical cube in the reset block.
